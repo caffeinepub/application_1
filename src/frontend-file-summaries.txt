@@ -1,0 +1,11 @@
+{
+  "frontend/src/App.tsx": "Main application component that wraps the app with ThemeProvider and renders Header, Hero, Gallery sections, and Footer with toast notifications.",
+  "frontend/src/components/Header.tsx": "Sticky header component with logo, navigation links, and theme toggle button for light/dark mode switching.",
+  "frontend/src/components/Hero.tsx": "Hero section with gradient background, animated title, description text, and call-to-action buttons.",
+  "frontend/src/components/Gallery.tsx": "Main gallery component with tabbed filtering (All, Characters, Worlds, Social) displaying image cards in a responsive grid with modal support.",
+  "frontend/src/components/ImageCard.tsx": "Reusable card component for displaying gallery images with hover effects, category badges, and loading states.",
+  "frontend/src/components/ImageModal.tsx": "Modal dialog component for displaying full-size images with title, description, and category information.",
+  "frontend/src/components/Footer.tsx": "Footer component with copyright notice, caffeine.ai attribution, and navigation links.",
+  "frontend/src/index.css": "Global styles with OKLCH color system for light/dark themes, featuring purple/pink gradient accent colors and custom animations.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for future React Query hooks to interact with backend (currently empty as backend has no functionality)."
+}

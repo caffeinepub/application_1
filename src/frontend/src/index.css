@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        --background: 0.98 0 0;
+        --foreground: 0.145 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.145 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.145 0 0;
+        --primary: 0.65 0.25 280;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.95 0.02 280;
+        --secondary-foreground: 0.145 0 0;
+        --muted: 0.96 0 0;
+        --muted-foreground: 0.5 0 0;
+        --accent: 0.70 0.22 320;
+        --accent-foreground: 0.98 0 0;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: 0.92 0 0;
+        --input: 0.92 0 0;
+        --ring: 0.65 0.25 280;
+        --chart-1: 0.646 0.222 41.116;
+        --chart-2: 0.6 0.118 184.704;
+        --chart-3: 0.398 0.07 227.392;
+        --chart-4: 0.828 0.189 84.429;
+        --chart-5: 0.769 0.188 70.08;
+    }
+
+    .dark {
+        --background: 0.12 0 0;
+        --foreground: 0.98 0 0;
+        --card: 0.15 0 0;
+        --card-foreground: 0.98 0 0;
+        --popover: 0.18 0 0;
+        --popover-foreground: 0.98 0 0;
+        --primary: 0.70 0.25 280;
+        --primary-foreground: 0.98 0 0;
+        --secondary: 0.20 0.02 280;
+        --secondary-foreground: 0.98 0 0;
+        --muted: 0.22 0 0;
+        --muted-foreground: 0.65 0 0;
+        --accent: 0.65 0.22 320;
+        --accent-foreground: 0.98 0 0;
+        --destructive: 0.60 0.25 27;
+        --destructive-foreground: 0.98 0 0;
+        --border: 0.25 0 0;
+        --input: 0.25 0 0;
+        --ring: 0.70 0.25 280;
+        --chart-1: 0.55 0.25 280;
+        --chart-2: 0.65 0.20 200;
+        --chart-3: 0.70 0.22 320;
+        --chart-4: 0.60 0.28 340;
+        --chart-5: 0.68 0.24 160;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold tracking-tight;
+    }
+}
+
+@layer utilities {
+    .animate-gradient {
+        background-size: 200% 200%;
+        animation: gradient 8s ease infinite;
+    }
+
+    @keyframes gradient {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+}
