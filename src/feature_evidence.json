@@ -1,0 +1,23 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-text-content-of-the-selected-gallery-card-description-paragraph-xpath-html-1-body-1-div-1-div-1-main-1-section-3-div-1-div-2-div-1-div-1-div-2-p-1-by-changing-the-description-for-the-first-visible-gallery-image-galleryimages-id-1-title-pink-dreams-from-this-is-the-coolest-photo-of-us-in-my-gallery-uff-aesthetic-log-to-if-there-was-an-award-for-the-cutest-photo-ever-taken-this-would-win-by-a-mile-kuchupuchu-in-frontend-src-content-siteconfig-ts",
+      "featureTitle": "Update the text content of the selected gallery card description paragraph (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[3]/div[1]/div[2]/div[1]/div[1]/div[2]/p[1]) by changing the description for the first visible gallery image (galleryImages id: '1', title: 'Pink Dreams') from \"This is the coolest photo of us in my gallery... uff Aesthetic log :>\" to \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\" in frontend/src/content/siteConfig.ts.",
+      "files": [
+        "frontend/src/content/siteConfig.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

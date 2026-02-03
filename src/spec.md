@@ -1,15 +1,10 @@
-# Application Specification
+# Specification
 
-## Overview
-Unable to generate specification - user request "yes" does not provide sufficient information about the desired application functionality.
+## Summary
+**Goal:** Update the description text for the first visible gallery card (“Pink Dreams”) and ensure it matches everywhere that card’s details are shown.
 
-## Requirements Needed
-To create a proper specification, please provide details about:
-- What type of application you want to build
-- Core functionality requirements
-- User interactions needed
-- Data storage requirements
-- Any specific features or capabilities
+**Planned changes:**
+- In `frontend/src/content/siteConfig.ts`, change the `galleryImages` entry with id `1` (title: “Pink Dreams”) description from `This is the coolest photo of us in my gallery... uff Aesthetic log :>` to `If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*`.
+- Ensure the same updated description appears in both the gallery card view and the image modal for that image.
 
-## Next Steps
-Please provide a clear description of the application you would like to build, including its purpose and main features.
+**User-visible outcome:** The “Pink Dreams” gallery card and its image modal display the updated description text exactly: `If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*`.

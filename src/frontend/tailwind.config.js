@@ -49,6 +49,10 @@ export default {
                     DEFAULT: 'oklch(var(--card))',
                     foreground: 'oklch(var(--card-foreground))'
                 },
+                'romantic-pink': 'oklch(var(--romantic-pink) / <alpha-value>)',
+                'romantic-rose': 'oklch(var(--romantic-rose) / <alpha-value>)',
+                'romantic-red': 'oklch(var(--romantic-red) / <alpha-value>)',
+                'romantic-cream': 'oklch(var(--romantic-cream) / <alpha-value>)',
                 chart: {
                     1: 'oklch(var(--chart-1))',
                     2: 'oklch(var(--chart-2))',
@@ -74,6 +78,23 @@ export default {
             },
             boxShadow: {
                 xs: '0 1px 2px 0 rgba(0,0,0,0.05)'
+            },
+            fontFamily: {
+                sans: [
+                    'Inter',
+                    'system-ui',
+                    '-apple-system',
+                    'BlinkMacSystemFont',
+                    'Segoe UI',
+                    'Roboto',
+                    'sans-serif'
+                ],
+                display: [
+                    'Poppins',
+                    'Inter',
+                    'system-ui',
+                    'sans-serif'
+                ]
             },
             keyframes: {
                 'accordion-down': {

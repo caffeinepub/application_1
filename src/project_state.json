@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 67,
+  "summary": "Project pivot: now building a single-page smooth-scrolling cute Hello Kitty–themed birthday website for Mayo (7 Feb), with a Roblox-themed section, an emotional/cute finale, animated photo collages using uploaded images, soft romantic background music (play-button, no forced autoplay), and signature “From Avdhesh ❤️”. User wants the ability to remove certain elements and change text/lines on photos and asks how they can edit the site.",
+  "existing_features": [
+    {
+      "id": "IF-1",
+      "title": "App shell with global providers and page layout",
+      "synonyms": [
+        "Application layout",
+        "Root composition"
+      ],
+      "description": "Wraps the UI in `ThemeProvider` (dark by default, system enabled), renders `Header`, `Hero`, `Gallery`, `Footer`, and mounts a global `Toaster` for notifications.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-2",
+      "title": "Sticky header with navigation and theme toggle",
+      "synonyms": [
+        "Top nav",
+        "Theme switcher"
+      ],
+      "description": "Provides a sticky, translucent header containing branding, anchor navigation links, and a light/dark toggle using `next-themes` with mounted-state guard to avoid hydration/theme mismatch.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-3",
+      "title": "Hero section with CTA and smooth scroll to gallery",
+      "synonyms": [
+        "Landing hero",
+        "CTA section"
+      ],
+      "description": "Displays a gradient/texture hero banner with title and description and a “View Gallery” button that smoothly scrolls to the `#gallery` section.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-4",
+      "title": "Tabbed gallery with category filtering",
+      "synonyms": [
+        "Image gallery",
+        "Category tabs"
+      ],
+      "description": "Renders a responsive grid of images with tabs for All/Characters/Worlds/Social; filters a static image list by category and shows an empty-state message when no images match.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-5",
+      "title": "Image card component with loading skeleton and hover effects",
+      "synonyms": [
+        "Gallery card",
+        "Thumbnail card"
+      ],
+      "description": "Displays each gallery image inside a card with a category badge, title/description text, a pulse skeleton until image load, lazy loading, and hover transitions (scale and overlay).",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-6",
+      "title": "Image modal viewer with metadata",
+      "synonyms": [
+        "Lightbox",
+        "Dialog viewer"
+      ],
+      "description": "Opens a dialog modal when an image is selected, showing the full image, title, description, and a color-coded category badge, with an explicit close button and dialog open state driven by selection.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-7",
+      "title": "Footer with attribution and anchor links",
+      "synonyms": [
+        "Site footer"
+      ],
+      "description": "Shows copyright, caffeine.ai attribution link, and anchor navigation links.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-8",
+      "title": "Tailwind-based design system with OKLCH theme tokens",
+      "synonyms": [
+        "Theming",
+        "CSS variables theme"
+      ],
+      "description": "Defines light/dark theme palettes using CSS variables (OKLCH), shared radii, and utility animations (e.g., animated gradient), with Tailwind configured for dark mode via class and additional plugins.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-9",
+      "title": "Global toast infrastructure",
+      "synonyms": [
+        "Notifications",
+        "Sonner toaster"
+      ],
+      "description": "Mounts a global `Toaster` component so the app can display toast notifications, although no toasts are triggered in the provided code.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-10",
+      "title": "React Query client setup",
+      "synonyms": [
+        "TanStack Query setup"
+      ],
+      "description": "Initializes a `QueryClient` and provides it to the app via `QueryClientProvider` as the basis for query caching and async state.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-11",
+      "title": "Internet Identity authentication provider",
+      "synonyms": [
+        "II auth",
+        "Auth context"
+      ],
+      "description": "Implements `InternetIdentityProvider` and `useInternetIdentity` hook to initialize an AuthClient, load stored identity on mount, perform login via Internet Identity, and logout/clear identity, while exposing status flags and errors through React context.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-12",
+      "title": "Backend actor creation hook tied to identity",
+      "synonyms": [
+        "ICP actor hook",
+        "Authenticated actor"
+      ],
+      "description": "Implements `useActor` using React Query to create an anonymous or authenticated backend actor depending on the current identity, keys the cached actor by principal, and invalidates/refetches all non-actor queries when the actor changes.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-14",
+      "title": "Additional landing page sections (Roblox + Finale)",
+      "synonyms": [
+        "RobloxSection",
+        "FinaleSection",
+        "Extra content sections"
+      ],
+      "description": "Adds additional content sections to the landing page beyond the original Hero/Gallery/Footer layout, including dedicated Roblox-themed and finale sections to extend the narrative/marketing content.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-15",
+      "title": "Music control UI component",
+      "synonyms": [
+        "Audio controls",
+        "MusicControl"
+      ],
+      "description": "Introduces a music/audio control component to manage playback or user-facing audio toggles/controls within the landing page experience.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-16",
+      "title": "Generated asset pipeline and generated images",
+      "synonyms": [
+        "Image generation outputs",
+        "Generated assets"
+      ],
+      "description": "Adds generated image assets under `frontend/public/assets/generated` and build-template scripts for resizing/pruning images to manage optimized media in the project.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-17",
+      "title": "Storage client utility",
+      "synonyms": [
+        "StorageClient",
+        "Client storage abstraction"
+      ],
+      "description": "Adds a storage utility to centralize access to browser storage (e.g., localStorage/sessionStorage) for app state/preferences.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-18",
+      "title": "Backend canister + declarations and query integration (advanced beyond placeholders)",
+      "synonyms": [
+        "Motoko core",
+        "Backend API wiring",
+        "Implemented queries"
+      ],
+      "description": "Updates the Motoko backend canister and regenerates/updates frontend declarations (`backend.did.*`, `backend.ts`, `backend.d.ts`) along with `useQueries.ts` to move beyond empty scaffolding and support actual backend/query usage through the actor/hooks.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-19",
+      "title": "Build-template scaffold for ICP React + Motoko projects",
+      "synonyms": [
+        "Project template",
+        "Exportable build template",
+        "ICP deploy template"
+      ],
+      "description": "Adds/updates a `build-template/` directory that mirrors a deployable ICP project layout (backend + frontend canister yamls, env/config, Vite/Tailwind setup, pnpm workspace/lockfiles, and deploy scripts), including scripts to resize/prune images and additional frontend lint rules for ICP/Internet Identity conventions.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-20",
+      "title": "Centralized site content configuration for easy editing",
+      "synonyms": [
+        "siteConfig",
+        "Content model",
+        "Editable copy"
+      ],
+      "description": "Introduces a dedicated content/config module (e.g., `frontend/src/content/siteConfig.ts`) to centralize editable strings and section content for the birthday SPA, enabling easier post-build customization without modifying many components directly.",
+      "reqIds": [
+        "AR-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "IF-21",
+      "title": "Project export/download workflow documented (GitHub/ICP CLI build-template)",
+      "synonyms": [
+        "Export instructions",
+        "Download code",
+        "ICP CLI deploy template"
+      ],
+      "description": "Adds/updates build-template and documentation/scripts to support exporting the project code for local editing/running (e.g., via GitHub/ZIP and/or ICP CLI using the included `build-template/` scaffold, `deploy.sh`, and README).",
+      "reqIds": [
+        "AR-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-text-content-of-the-selected-gallery-card-description-paragraph-xpath-html-1-body-1-div-1-div-1-main-1-section-3-div-1-div-2-div-1-div-1-div-2-p-1-by-changing-the-description-for-the-first-visible-gallery-image-galleryimages-id-1-title-pink-dreams-from-this-is-the-coolest-photo-of-us-in-my-gallery-uff-aesthetic-log-to-if-there-was-an-award-for-the-cutest-photo-ever-taken-this-would-win-by-a-mile-kuchupuchu-in-frontend-src-content-siteconfig-ts",
+      "title": "Update the text content of the selected gallery card description paragraph (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[3]/div[1]/div[2]/div[1]/div[1]/div[2]/p[1]) by changing the description for the first visible gallery image (galleryImages id: '1', title: 'Pink Dreams') from \"This is the coolest photo of us in my gallery... uff Aesthetic log :>\" to \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\" in frontend/src/content/siteConfig.ts.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [],
+  "architectural_notes": [
+    "Frontend is a component-based React SPA rendered from `main.tsx` into `#root`.",
+    "Global providers are composed at the root: TanStack Query (`QueryClientProvider`) and an ICP Internet Identity context provider (`InternetIdentityProvider`), plus `next-themes` `ThemeProvider` inside `App`.",
+    "Uses TanStack React Query not only for data fetching, but also for lifecycle management of an ICP actor instance (`useActor`) keyed by principal/identity.",
+    "UI appears to follow a shadcn/Radix-style component approach (e.g., `Dialog`, `Tabs`, `Badge`, `Card`, `Button`) with Tailwind utility styling.",
+    "Tailwind is configured with OKLCH-based design tokens via CSS variables, supports dark mode via `class`, and includes animation/typography/container-query plugins.",
+    "Gallery content is currently static and hardcoded in the frontend as an in-memory array of image metadata.",
+    "Landing page expanded with additional sections/components (e.g., Roblox/Finale) and a dedicated MusicControl UI component.",
+    "Project now includes an explicit client-side storage abstraction (`StorageClient`) for persisting/retrieving app preferences/state.",
+    "Media pipeline expanded: generated images are checked into `public/assets/generated`, and build-template scripts exist to resize and prune unused images for optimized builds.",
+    "Backend integration advanced: backend canister code and frontend DID/declaration artifacts were updated alongside `useQueries` to support real query hooks rather than a pure placeholder.",
+    "A full `build-template/` project scaffold is maintained alongside the main app, including ICP canister configs (`canister.yaml`), deploy scripts (`deploy.sh`, `icp.yaml`), pnpm workspace manifests, and frontend build tooling (Vite/Tailwind/PostCSS).",
+    "The build-template includes a broad shadcn/Radix-style UI component set under `build-template/src/frontend/src/components/ui/*` plus custom ESLint rules (e.g., preventing BigInt in query keys, enforcing InternetIdentityProvider usage).",
+    "Image optimization utilities are duplicated/maintained in the build-template via `scripts/resize-images.js` and `scripts/prune-unused-images.js` to support producing optimized builds from the template.",
+    "Site copy/content is now centralized in a dedicated config/content module (e.g., `frontend/src/content/siteConfig.ts`) to make post-build edits easier.",
+    "Build-template documentation and scripts were expanded to support exporting/downloading and running the project locally (GitHub/ZIP + ICP CLI workflow).",
+    "Build-template packaging was expanded/updated to be more self-contained for export and deployment, including a Dockerfile plus refreshed licensing/README/deploy/config files."
+  ],
+  "known_issues": [
+    "Gallery images are hardcoded and reference `/assets/...`; there is no dynamic loading, pagination, or CMS/backend integration.",
+    "Two different `index.css` contents are present in the provided file list (potential duplication/overwriting risk depending on actual repo structure).",
+    "`DEFAULT_IDENTITY_PROVIDER` uses `process.env.II_URL`; if unset at runtime, login may fail or behave unexpectedly.",
+    "`useInternetIdentity` sets `loginStatus` to `idle` after initialization even when a stored identity is loaded; consumers must rely on `identity` rather than `isLoginSuccess` to detect an authenticated session loaded on mount.",
+    "User reports they are on a laptop using Caffeine web UI but cannot find any dashboard/export/download option to obtain the project code (possible UI/permissions/entry-point mismatch).",
+    "Edits to photo-specific headlines/paragraphs are sometimes applied to the wrong photo/card (mis-targeting/mapping issue), causing users to request reverts and reapplication to the correct image."
+  ],
+  "isFixRequest": true,
+  "generatedImages": [
+    {
+      "filename": "frontend/public/assets/generated/kitty-bow-heart.dim_512x512.png",
+      "description": "Generated image asset added to the project (512x512).",
+      "targetWidth": 512,
+      "targetHeight": 512
+    },
+    {
+      "filename": "frontend/public/assets/generated/pastel-sparkle-bg.dim_1920x1080.png",
+      "description": "Generated background image asset added to the project (1920x1080).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Virtual Worlds",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

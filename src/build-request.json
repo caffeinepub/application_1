@@ -1,0 +1,36 @@
+{
+  "kind": "build_request",
+  "title": "Update first gallery card description text",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Update the text content of the selected gallery card description paragraph (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[3]/div[1]/div[2]/div[1]/div[1]/div[2]/p[1]) by changing the description for the first visible gallery image (galleryImages id: '1', title: 'Pink Dreams') from \"This is the coolest photo of us in my gallery... uff Aesthetic log :>\" to \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\" in frontend/src/content/siteConfig.ts.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "This is the coolest photo of us in my gallery... uff Aesthetic log :> replace this with \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\""
+        ]
+      },
+      "acceptanceCriteria": [
+        "The first visible gallery card (Pink Dreams) shows the updated description text exactly: \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\".",
+        "No other gallery card titles or descriptions are changed.",
+        "Opening the image modal for the same image also shows the updated description text."
+      ]
+    }
+  ],
+  "constraints": [
+    "Apply the change only to the user-selected element (the first visible gallery card description) and do not modify other content."
+  ],
+  "nonGoals": [
+    "Do not add new animations or visual effects.",
+    "Do not change gallery layout, filtering, or any image assets."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

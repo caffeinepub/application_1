@@ -1,11 +1,16 @@
 {
-  "frontend/src/App.tsx": "Main application component that wraps the app with ThemeProvider and renders Header, Hero, Gallery sections, and Footer with toast notifications.",
-  "frontend/src/components/Header.tsx": "Sticky header component with logo, navigation links, and theme toggle button for light/dark mode switching.",
-  "frontend/src/components/Hero.tsx": "Hero section with gradient background, animated title, description text, and call-to-action buttons.",
-  "frontend/src/components/Gallery.tsx": "Main gallery component with tabbed filtering (All, Characters, Worlds, Social) displaying image cards in a responsive grid with modal support.",
-  "frontend/src/components/ImageCard.tsx": "Reusable card component for displaying gallery images with hover effects, category badges, and loading states.",
-  "frontend/src/components/ImageModal.tsx": "Modal dialog component for displaying full-size images with title, description, and category information.",
-  "frontend/src/components/Footer.tsx": "Footer component with copyright notice, caffeine.ai attribution, and navigation links.",
-  "frontend/src/index.css": "Global styles with OKLCH color system for light/dark themes, featuring purple/pink gradient accent colors and custom animations.",
-  "frontend/src/hooks/useQueries.ts": "Placeholder file for future React Query hooks to interact with backend (currently empty as backend has no functionality)."
+  "frontend/src/App.tsx": "Main application component that conditionally renders sections (Hero, Roblox, Gallery, Finale, MusicControl, Footer) based on centralized sectionVisibility configuration.",
+  "frontend/src/components/Header.tsx": "Sticky header that dynamically generates navigation links from centralized config, preventing broken scroll behavior when sections are disabled.",
+  "frontend/src/components/Hero.tsx": "Intro section that conditionally renders CTA buttons based on whether Photos and Finale sections are enabled in the centralized config.",
+  "frontend/src/components/Gallery.tsx": "Photo collage section that displays only visible images from centralized config (filtering out hidden ones) and uses configured titles/descriptions for cards and modal.",
+  "frontend/src/components/ImageCard.tsx": "Reusable card component for gallery images with cute hover effects, heart icon overlay, lightweight float animation, and romantic-themed styling.",
+  "frontend/src/components/ImageModal.tsx": "Modal dialog for displaying full-size images with romantic-themed styling, heart icon in title, smooth transitions, and optional debug info showing image ID and filename when showImageDebugInfo toggle is enabled.",
+  "frontend/src/components/Footer.tsx": "Footer that dynamically generates navigation links from centralized config, showing only enabled sections.",
+  "frontend/src/index.css": "Global styles with OKLCH color system featuring cute/romantic pink/cream/red palette, custom animations (float, heartbeat, bounce-slow), smooth scroll behavior, and section scroll-margin for sticky header offset.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for future React Query hooks to interact with backend (currently empty as backend has no functionality).",
+  "frontend/src/components/RobloxSection.tsx": "Roblox-themed section that explicitly mentions \"Roblox\" multiple times in the copy, features a floating image with gaming icons, and describes shared Roblox adventures in a cute/romantic tone.",
+  "frontend/src/components/FinaleSection.tsx": "Emotional finale section with romantic messages, animated hearts, and the exact signature \"From Avdhesh ❤️\" in a prominent styled box.",
+  "frontend/src/components/MusicControl.tsx": "Floating music control component with Play/Pause button and volume slider popover, no autoplay, gentle default volume (0.3), and accessible on mobile and desktop.",
+  "frontend/tailwind.config.js": "Tailwind configuration with romantic color tokens (romantic-pink, romantic-rose, romantic-red, romantic-cream), custom font families (Inter, Poppins), increased border radius (1rem), and extended theme for the cute/romantic aesthetic.",
+  "frontend/src/content/siteConfig.ts": "Centralized configuration file for section visibility toggles and gallery image data; the first visible card (id '1', 'Pink Dreams') now displays \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\" as its description."
 }

@@ -1,0 +1,23 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Update Pink Dreams gallery description text",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Update the description text for the first visible gallery image (id: '1', title: 'Pink Dreams') in the centralized site config so the gallery card and modal display the new wording.",
+      "acceptanceCriteria": [
+        "The first visible gallery card (Pink Dreams) shows the updated description text exactly: \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\".",
+        "No other gallery card titles or descriptions are changed.",
+        "Opening the image modal for the same image also shows the updated description text."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/content/siteConfig.ts",
+          "operation": "modify",
+          "description": "In the galleryImages entry with id '1' and title 'Pink Dreams', change description from \"This is the coolest photo of us in my gallery... uff Aesthetic log :>\" to \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\", without altering any other gallery image fields."
+        }
+      ]
+    }
+  ]
+}
