@@ -1,4 +1,4 @@
-import { Moon, Sun, Heart } from 'lucide-react';
+import { Moon, Sun, Heart, Cake } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from './ui/button';
 import { useEffect, useState } from 'react';
@@ -52,6 +52,9 @@ export function Header() {
             >
               {item.icon === 'heart' && (
                 <Heart className="h-3 w-3 fill-romantic-red text-romantic-red" />
+              )}
+              {item.icon === 'cake' && (
+                <Cake className="h-3 w-3 text-romantic-pink" />
               )}
               {item.label}
             </button>

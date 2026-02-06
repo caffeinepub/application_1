@@ -6,6 +6,7 @@ export interface SectionVisibility {
   roblox: boolean;
   photos: boolean;
   finale: boolean;
+  cake: boolean;
   musicControl: boolean;
   footer: boolean;
 }
@@ -22,7 +23,7 @@ export interface NavigationItem {
   id: string;
   label: string;
   sectionId: string;
-  icon?: 'heart' | 'camera' | 'sparkles';
+  icon?: 'heart' | 'camera' | 'sparkles' | 'cake';
 }
 
 // Section visibility toggles
@@ -31,6 +32,7 @@ export const sectionVisibility: SectionVisibility = {
   roblox: true,
   photos: true,
   finale: true,
+  cake: true,
   musicControl: true,
   footer: true,
 };
@@ -50,13 +52,13 @@ export const galleryImages: GalleryImage[] = [
     id: '2',
     src: '/assets/7871793065_87527722861483_1765480477796.png',
     title: 'Night Drive',
-    description: 'Stylish vibes in the showroom ✨',
+    description: 'This is the coolest photo of us in my gallery... uff Aesthetic log :>',
   },
   {
     id: '3',
     src: '/assets/7871793065_87527722861483_1765480617622.png',
-    title: 'Showroom Vibes',
-    description: 'Looking absolutely stunning in style 🚗✨',
+    title: 'photopglu',
+    description: 'ik ye game thoda ajeeb tha or me uper pose dene ke liye bol raha tha niche side dekho muheheh XD',
   },
   {
     id: '4',
@@ -171,6 +173,10 @@ export function getNavigationItems(): NavigationItem[] {
 
   if (sectionVisibility.photos) {
     items.push({ id: 'photos', label: 'Photos', sectionId: 'photos', icon: 'camera' });
+  }
+
+  if (sectionVisibility.cake) {
+    items.push({ id: 'cake', label: 'Cake', sectionId: 'cake', icon: 'cake' });
   }
 
   if (sectionVisibility.finale) {

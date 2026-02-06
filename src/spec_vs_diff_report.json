@@ -1,29 +1,52 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-03T21:08:58.848Z",
-  "summary": "REQ-1 appears implemented by updating the description for galleryImages id '1' (title 'Pink Dreams') in frontend/src/content/siteConfig.ts to the exact requested string. However, two additional files were modified that were not requested in the BuildRequest.",
-  "missing_requirements": [],
-  "hallucinated_features": [
+  "generatedAt": "2026-02-06T09:02:32.751Z",
+  "summary": "Diff adds a new CakeSection, wires it into App rendering behind a siteConfig visibility toggle, updates Header navigation to be config-driven (including a Cake icon/item), and adds new global CSS animations for flame/smoke. However, the diff summary does not show the required generated image assets being added, and the exact required popup text/accessible dismissal behavior cannot be fully verified from the truncated CakeSection content.",
+  "missing_requirements": [
     {
-      "description": "Updated/generated frontend-file-summaries.txt content (documentation/metadata) despite request only asking to change the gallery card description text in siteConfig.ts.",
-      "reason": "BuildRequest only requests updating a specific description string in frontend/src/content/siteConfig.ts and explicitly constrains changes to only the selected element/content.",
+      "id": "REQ-3",
+      "requirement": "Clicking/tapping the cake/candle opens a popup with the exact text “Happy B’day!” (English).",
+      "reason": "The provided evidence only indicates a popup with \"Happy B'day!\" (straight apostrophe) and the CakeSection file is truncated before showing the exact rendered dialog text, so the exact required string with the curly apostrophe (B’day) cannot be confirmed.",
       "evidence": [
+        "frontend/src/components/CakeSection.tsx (truncated)",
         "frontend-file-summaries.txt"
       ]
     },
     {
-      "description": "Updated project_state.json (project metadata/state) despite request only asking to change the gallery card description text in siteConfig.ts.",
-      "reason": "BuildRequest does not request any changes to project tracking/state files; constraint says do not modify other content beyond the selected element.",
+      "id": "REQ-4",
+      "requirement": "The popup is accessible: it can be dismissed via click/tap and via keyboard (Escape) if implemented as a dialog.",
+      "reason": "CakeSection imports Dialog components, but the truncated snippet does not show how the dialog open/close is wired (e.g., onOpenChange, close button/overlay click behavior). Therefore dismissal via click/tap and Escape cannot be verified from the diff summary alone.",
       "evidence": [
-        "project_state.json"
+        "frontend/src/components/CakeSection.tsx (truncated)"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Add the required generated image assets under frontend/public/assets/generated with the exact filenames specified, and render them via /assets/generated/... with no backend involvement.",
+      "reason": "CakeSection references the required filenames via /assets/generated/... paths, but the diff summary does not show any new files added under frontend/public/assets/generated, so the existence of the required image assets cannot be confirmed.",
+      "evidence": [
+        "frontend/src/components/CakeSection.tsx (truncated)"
       ]
     }
   ],
-  "confidence": 0.86,
+  "hallucinated_features": [
+    {
+      "description": "Added additional user-facing copy beyond the requested popup (e.g., “Make a Wish! 🎂” and “Tap the cake to blow out the candle and celebrate!”).",
+      "reason": "The BuildRequest only required the popup text and interaction/animation behavior; these extra headings/instructions were not explicitly requested.",
+      "evidence": [
+        "frontend/src/components/CakeSection.tsx (truncated)"
+      ]
+    }
+  ],
+  "confidence": 0.64,
   "changed_files": [
     "frontend-file-summaries.txt",
+    "frontend/src/App.tsx",
+    "frontend/src/components/CakeSection.tsx",
+    "frontend/src/components/Header.tsx",
     "frontend/src/content/siteConfig.ts",
+    "frontend/src/index.css",
     "project_state.json"
   ]
 }

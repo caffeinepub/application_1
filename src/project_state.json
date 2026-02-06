@@ -1,7 +1,43 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 67,
-  "summary": "Project pivot: now building a single-page smooth-scrolling cute Hello Kitty–themed birthday website for Mayo (7 Feb), with a Roblox-themed section, an emotional/cute finale, animated photo collages using uploaded images, soft romantic background music (play-button, no forced autoplay), and signature “From Avdhesh ❤️”. User wants the ability to remove certain elements and change text/lines on photos and asks how they can edit the site.",
+  "projectStateVersion": 87,
+  "summary": "Project is a cute Hello Kitty–themed birthday SPA for Mayo (7 Feb) with Roblox section, emotional finale, animated photo collages, romantic background music (play button), and signature “From Avdhesh ❤️”. A new interactive “cake” page is being added featuring a large cake with a lit candle; tapping triggers a Happy Birthday popup and blows out the candle.",
+  "architectural_notes": [
+    "Frontend is a component-based React SPA rendered from `main.tsx` into `#root`.",
+    "Global providers are composed at the root: TanStack Query (`QueryClientProvider`) and an ICP Internet Identity context provider (`InternetIdentityProvider`), plus `next-themes` `ThemeProvider` inside `App`.",
+    "Uses TanStack React Query not only for data fetching, but also for lifecycle management of an ICP actor instance (`useActor`) keyed by principal/identity.",
+    "UI appears to follow a shadcn/Radix-style component approach (e.g., `Dialog`, `Tabs`, `Badge`, `Card`, `Button`) with Tailwind utility styling.",
+    "Tailwind is configured with OKLCH-based design tokens via CSS variables, supports dark mode via `class`, and includes animation/typography/container-query plugins.",
+    "Gallery content is currently static and hardcoded in the frontend as an in-memory array of image metadata.",
+    "Landing page expanded with additional sections/components (e.g., Roblox/Finale) and a dedicated MusicControl UI component.",
+    "Project now includes an explicit client-side storage abstraction (`StorageClient`) for persisting/retrieving app preferences/state.",
+    "Media pipeline expanded: generated images are checked into `public/assets/generated`, and build-template scripts exist to resize and prune unused images for optimized builds.",
+    "Backend integration advanced: backend canister code and frontend DID/declaration artifacts were updated alongside `useQueries` to support real query hooks rather than a pure placeholder."
+  ],
+  "known_issues": [
+    "Gallery images are hardcoded and reference `/assets/...`; there is no dynamic loading, pagination, or CMS/backend integration.",
+    "Two different `index.css` contents are present in the provided file list (potential duplication/overwriting risk depending on actual repo structure).",
+    "`DEFAULT_IDENTITY_PROVIDER` uses `process.env.II_URL`; if unset at runtime, login may fail or behave unexpectedly.",
+    "`useInternetIdentity` sets `loginStatus` to `idle` after initialization even when a stored identity is loaded; consumers must rely on `identity` rather than `isLoginSuccess` to detect an authenticated session loaded on mount.",
+    "User reports they are on a laptop using Caffeine web UI but cannot find any dashboard/export/download option to obtain the project code (possible UI/permissions/entry-point mismatch).",
+    "Publishing/domain error observed: domain `mayo-b'day` rejected because domains must be 5–50 chars and contain only letters, numbers, and hyphens (no apostrophes)."
+  ],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Large cute birthday cake with a single lit candle, front view, clean pastel style, transparent background (cake-lit.dim_1200x1200.png)\n- Same cake with the candle extinguished (no flame), subtle smoke curl above wick, matching style and framing, transparent background (cake-out.dim_1200x1200.png)\n- Small candle flame icon (separate element), soft glow, transparent background (candle-flame.dim_256x256.png)\n- Small smoke puff/curl icon, light gray, transparent background (candle-smoke.dim_256x256.png)",
+  "generatedImages": [
+    {
+      "filename": "frontend/public/assets/generated/kitty-bow-heart.dim_512x512.png",
+      "description": "Generated image asset added to the project (512x512).",
+      "targetWidth": 512,
+      "targetHeight": 512
+    },
+    {
+      "filename": "frontend/public/assets/generated/pastel-sparkle-bg.dim_1920x1080.png",
+      "description": "Generated background image asset added to the project (1920x1080).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    }
+  ],
   "existing_features": [
     {
       "id": "IF-1",
@@ -231,54 +267,64 @@
       "version": 1
     },
     {
-      "id": "feature-update-the-text-content-of-the-selected-gallery-card-description-paragraph-xpath-html-1-body-1-div-1-div-1-main-1-section-3-div-1-div-2-div-1-div-1-div-2-p-1-by-changing-the-description-for-the-first-visible-gallery-image-galleryimages-id-1-title-pink-dreams-from-this-is-the-coolest-photo-of-us-in-my-gallery-uff-aesthetic-log-to-if-there-was-an-award-for-the-cutest-photo-ever-taken-this-would-win-by-a-mile-kuchupuchu-in-frontend-src-content-siteconfig-ts",
-      "title": "Update the text content of the selected gallery card description paragraph (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[3]/div[1]/div[2]/div[1]/div[1]/div[2]/p[1]) by changing the description for the first visible gallery image (galleryImages id: '1', title: 'Pink Dreams') from \"This is the coolest photo of us in my gallery... uff Aesthetic log :>\" to \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\" in frontend/src/content/siteConfig.ts.",
+      "id": "feature-add-a-new-top-level-page-section-named-cake-to-the-existing-spa-and-expose-it-in-the-header-footer-navigation-using-the-existing-centralized-configuration-approach-siteconfig-driven-navigation-visibility",
+      "title": "Add a new top-level page/section named “Cake” to the existing SPA and expose it in the header/footer navigation using the existing centralized configuration approach (siteConfig-driven navigation + visibility).",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
-    }
-  ],
-  "new_feature_requests": [],
-  "architectural_notes": [
-    "Frontend is a component-based React SPA rendered from `main.tsx` into `#root`.",
-    "Global providers are composed at the root: TanStack Query (`QueryClientProvider`) and an ICP Internet Identity context provider (`InternetIdentityProvider`), plus `next-themes` `ThemeProvider` inside `App`.",
-    "Uses TanStack React Query not only for data fetching, but also for lifecycle management of an ICP actor instance (`useActor`) keyed by principal/identity.",
-    "UI appears to follow a shadcn/Radix-style component approach (e.g., `Dialog`, `Tabs`, `Badge`, `Card`, `Button`) with Tailwind utility styling.",
-    "Tailwind is configured with OKLCH-based design tokens via CSS variables, supports dark mode via `class`, and includes animation/typography/container-query plugins.",
-    "Gallery content is currently static and hardcoded in the frontend as an in-memory array of image metadata.",
-    "Landing page expanded with additional sections/components (e.g., Roblox/Finale) and a dedicated MusicControl UI component.",
-    "Project now includes an explicit client-side storage abstraction (`StorageClient`) for persisting/retrieving app preferences/state.",
-    "Media pipeline expanded: generated images are checked into `public/assets/generated`, and build-template scripts exist to resize and prune unused images for optimized builds.",
-    "Backend integration advanced: backend canister code and frontend DID/declaration artifacts were updated alongside `useQueries` to support real query hooks rather than a pure placeholder.",
-    "A full `build-template/` project scaffold is maintained alongside the main app, including ICP canister configs (`canister.yaml`), deploy scripts (`deploy.sh`, `icp.yaml`), pnpm workspace manifests, and frontend build tooling (Vite/Tailwind/PostCSS).",
-    "The build-template includes a broad shadcn/Radix-style UI component set under `build-template/src/frontend/src/components/ui/*` plus custom ESLint rules (e.g., preventing BigInt in query keys, enforcing InternetIdentityProvider usage).",
-    "Image optimization utilities are duplicated/maintained in the build-template via `scripts/resize-images.js` and `scripts/prune-unused-images.js` to support producing optimized builds from the template.",
-    "Site copy/content is now centralized in a dedicated config/content module (e.g., `frontend/src/content/siteConfig.ts`) to make post-build edits easier.",
-    "Build-template documentation and scripts were expanded to support exporting/downloading and running the project locally (GitHub/ZIP + ICP CLI workflow).",
-    "Build-template packaging was expanded/updated to be more self-contained for export and deployment, including a Dockerfile plus refreshed licensing/README/deploy/config files."
-  ],
-  "known_issues": [
-    "Gallery images are hardcoded and reference `/assets/...`; there is no dynamic loading, pagination, or CMS/backend integration.",
-    "Two different `index.css` contents are present in the provided file list (potential duplication/overwriting risk depending on actual repo structure).",
-    "`DEFAULT_IDENTITY_PROVIDER` uses `process.env.II_URL`; if unset at runtime, login may fail or behave unexpectedly.",
-    "`useInternetIdentity` sets `loginStatus` to `idle` after initialization even when a stored identity is loaded; consumers must rely on `identity` rather than `isLoginSuccess` to detect an authenticated session loaded on mount.",
-    "User reports they are on a laptop using Caffeine web UI but cannot find any dashboard/export/download option to obtain the project code (possible UI/permissions/entry-point mismatch).",
-    "Edits to photo-specific headlines/paragraphs are sometimes applied to the wrong photo/card (mis-targeting/mapping issue), causing users to request reverts and reapplication to the correct image."
-  ],
-  "isFixRequest": true,
-  "generatedImages": [
-    {
-      "filename": "frontend/public/assets/generated/kitty-bow-heart.dim_512x512.png",
-      "description": "Generated image asset added to the project (512x512).",
-      "targetWidth": 512,
-      "targetHeight": 512
     },
     {
-      "filename": "frontend/public/assets/generated/pastel-sparkle-bg.dim_1920x1080.png",
-      "description": "Generated background image asset added to the project (1920x1080).",
-      "targetWidth": 1920,
-      "targetHeight": 1080
+      "id": "feature-implement-the-cake-page-ui-show-a-large-cake-illustration-centered-on-the-page-with-a-visibly-lit-candle-by-default-matching-the-app-s-existing-tailwind-theme-light-dark-and-layout-patterns",
+      "title": "Implement the Cake page UI: show a large cake illustration centered on the page with a visibly lit candle by default, matching the app’s existing Tailwind theme (light/dark) and layout patterns.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-interaction-when-the-user-taps-clicks-the-cake-or-specifically-the-candle-show-a-popup-that-says-happy-b-day-and-visually-extinguish-the-candle-including-a-simple-animation-for-the-transition-e-g-flame-fade-shrink-small-smoke-puff",
+      "title": "Add interaction: when the user taps/clicks the cake (or specifically the candle), show a popup that says “Happy B’day!” and visually extinguish the candle, including a simple animation for the transition (e.g., flame fade/shrink + small smoke puff).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-use-the-existing-ui-infrastructure-for-the-popup-prefer-existing-toast-infrastructure-or-an-existing-dialog-pattern-already-in-the-app-without-modifying-any-read-only-ui-component-sources-under-frontend-src-components-ui",
+      "title": "Use the existing UI infrastructure for the popup (prefer existing toast infrastructure or an existing dialog pattern already in the app) without modifying any read-only UI component sources under frontend/src/components/ui.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-required-generated-image-assets-for-the-cake-page-under-frontend-public-assets-generated-and-render-them-directly-from-the-frontend-no-backend-involvement",
+      "title": "Add the required generated image assets for the Cake page under frontend/public/assets/generated and render them directly from the frontend (no backend involvement).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-3",
+      "summary": "Provide clear publish/deploy guidance from Caffeine (how to go live, choose valid domain, and steps if dashboard/export not visible)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Enable/guide user to edit the generated code (access editor or download/export code from Caffeine)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add a new page named “cake” with a big cake and lit candle; on tap show “Happy b’day” popup and extinguish the candle (with animation).",
+      "reqIds": [],
+      "status": "in_progress"
     }
   ],
   "gameProjectType": "none",

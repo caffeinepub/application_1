@@ -40,6 +40,9 @@ export function FinaleSection() {
                 On your special day, I want you to know how much you mean to me. 
                 You're not just amazing, you're irreplaceable. Here's to celebrating you today 
                 and always! 🎂✨
+                <span className="block mt-2 text-sm md:text-base">
+                  ur my fav person &gt;3
+                </span>
               </p>
             </div>
           </div>

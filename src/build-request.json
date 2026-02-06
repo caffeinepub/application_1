@@ -1,36 +1,131 @@
 {
   "kind": "build_request",
-  "title": "Update first gallery card description text",
+  "title": "Add interactive “Cake” page with tappable candle, birthday popup, and blow-out animation",
   "priority": "normal",
   "requirements": [
     {
       "id": "REQ-1",
-      "text": "Update the text content of the selected gallery card description paragraph (XPath: /html[1]/body[1]/div[1]/div[1]/main[1]/section[3]/div[1]/div[2]/div[1]/div[1]/div[2]/p[1]) by changing the description for the first visible gallery image (galleryImages id: '1', title: 'Pink Dreams') from \"This is the coolest photo of us in my gallery... uff Aesthetic log :>\" to \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\" in frontend/src/content/siteConfig.ts.",
+      "text": "Add a new top-level page/section named “Cake” to the existing SPA and expose it in the header/footer navigation using the existing centralized configuration approach (siteConfig-driven navigation + visibility).",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-4"
+          "msg-7",
+          "msg-9"
         ],
         "quotes": [
-          "This is the coolest photo of us in my gallery... uff Aesthetic log :> replace this with \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\""
+          "make one more page...",
+          "cake"
         ]
       },
       "acceptanceCriteria": [
-        "The first visible gallery card (Pink Dreams) shows the updated description text exactly: \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\".",
-        "No other gallery card titles or descriptions are changed.",
-        "Opening the image modal for the same image also shows the updated description text."
+        "A new “Cake” navigation item appears alongside existing sections when enabled in the central site config.",
+        "Clicking “Cake” scrolls/navigates to the Cake page/section reliably on desktop.",
+        "The Cake page/section can be enabled/disabled via the central site configuration without code changes elsewhere."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Implement the Cake page UI: show a large cake illustration centered on the page with a visibly lit candle by default, matching the app’s existing Tailwind theme (light/dark) and layout patterns.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "usme ek bada sa cake ho or usme candle jal rahi ho"
+        ]
+      },
+      "acceptanceCriteria": [
+        "On first render, the cake is large and centered and the candle appears lit.",
+        "The page is responsive (mobile and desktop) and does not overflow horizontally.",
+        "The page styling is consistent with the existing design system and theming (light/dark)."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add interaction: when the user taps/clicks the cake (or specifically the candle), show a popup that says “Happy B’day!” and visually extinguish the candle, including a simple animation for the transition (e.g., flame fade/shrink + small smoke puff).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "usko tap krne per happy b'day popup ho or candle bhuj jaye"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking/tapping the cake/candle opens a popup with the exact text “Happy B’day!” (English).",
+        "After the first click/tap, the candle changes to an “extinguished” state and the lit flame is no longer visible.",
+        "The transition from lit to extinguished includes a visible animation (not an instant swap).",
+        "Repeated clicks/taps do not break the UI; the candle remains extinguished (idempotent behavior is acceptable)."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Use the existing UI infrastructure for the popup (prefer existing toast infrastructure or an existing dialog pattern already in the app) without modifying any read-only UI component sources under frontend/src/components/ui.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "happy b'day popup"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The popup uses existing project primitives (toast/dialog) and renders correctly in light and dark mode.",
+        "No files under frontend/src/components/ui are modified.",
+        "The popup is accessible: it can be dismissed via click/tap and via keyboard (Escape) if implemented as a dialog."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add the required generated image assets for the Cake page under frontend/public/assets/generated and render them directly from the frontend (no backend involvement).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-7"
+        ],
+        "quotes": [
+          "ek bada sa cake...candle jal rahi ho...candle bhuj jaye"
+        ]
+      },
+      "acceptanceCriteria": [
+        "New cake/candle images exist in frontend/public/assets/generated with the exact filenames specified in this build request.",
+        "The Cake page uses these static assets via a /assets/generated/... path and they load correctly in production build.",
+        "No backend endpoints are introduced for serving or transforming these images."
       ]
     }
   ],
   "constraints": [
-    "Apply the change only to the user-selected element (the first visible gallery card description) and do not modify other content."
+    "Do not modify files listed as immutable: frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, and any files under frontend/src/components/ui.",
+    "Keep backend as a single Motoko actor; do not add backend functionality for this purely UI interaction.",
+    "All user-facing text added by this change must be in English."
   ],
   "nonGoals": [
-    "Do not add new animations or visual effects.",
-    "Do not change gallery layout, filtering, or any image assets."
+    "Do not add Internet Identity gating for the Cake page.",
+    "Do not add persistence (e.g., remembering candle state across refresh) unless explicitly requested later.",
+    "Do not introduce new backend storage, databases, or external APIs for this feature."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Large cute birthday cake with a single lit candle, front view, clean pastel style, transparent background (cake-lit.dim_1200x1200.png)",
+      "Same cake with the candle extinguished (no flame), subtle smoke curl above wick, matching style and framing, transparent background (cake-out.dim_1200x1200.png)",
+      "Small candle flame icon (separate element), soft glow, transparent background (candle-flame.dim_256x256.png)",
+      "Small smoke puff/curl icon, light gray, transparent background (candle-smoke.dim_256x256.png)"
+    ],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [
+      "User-facing text should be in English."
+    ],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

@@ -3,156 +3,200 @@
 @tailwind utilities;
 
 @layer base {
-    :root {
-        --radius: 1rem;
-        --background: 0.98 0.01 30;
-        --foreground: 0.25 0.02 30;
-        --card: 1 0 0;
-        --card-foreground: 0.25 0.02 30;
-        --popover: 1 0 0;
-        --popover-foreground: 0.25 0.02 30;
-        --primary: 0.75 0.18 15;
-        --primary-foreground: 0.98 0 0;
-        --secondary: 0.95 0.03 30;
-        --secondary-foreground: 0.25 0.02 30;
-        --muted: 0.94 0.02 30;
-        --muted-foreground: 0.55 0.02 30;
-        --accent: 0.82 0.15 25;
-        --accent-foreground: 0.98 0 0;
-        --destructive: 0.577 0.245 27.325;
-        --destructive-foreground: 0.985 0 0;
-        --border: 0.90 0.02 30;
-        --input: 0.90 0.02 30;
-        --ring: 0.75 0.18 15;
-        --romantic-pink: 0.85 0.15 350;
-        --romantic-rose: 0.70 0.20 10;
-        --romantic-red: 0.60 0.25 15;
-        --romantic-cream: 0.95 0.03 40;
-        --chart-1: 0.75 0.18 15;
-        --chart-2: 0.70 0.20 10;
-        --chart-3: 0.82 0.15 25;
-        --chart-4: 0.85 0.15 350;
-        --chart-5: 0.95 0.03 40;
-    }
+  :root {
+    /* Romantic pink/cream/red palette using OKLCH */
+    --background: oklch(98% 0.01 320);
+    --foreground: oklch(25% 0.02 320);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(25% 0.02 320);
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(25% 0.02 320);
+    --primary: oklch(65% 0.18 350);
+    --primary-foreground: oklch(100% 0 0);
+    --secondary: oklch(95% 0.02 320);
+    --secondary-foreground: oklch(25% 0.02 320);
+    --muted: oklch(95% 0.01 320);
+    --muted-foreground: oklch(50% 0.02 320);
+    --accent: oklch(95% 0.02 320);
+    --accent-foreground: oklch(25% 0.02 320);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(100% 0 0);
+    --border: oklch(90% 0.02 320);
+    --input: oklch(90% 0.02 320);
+    --ring: oklch(65% 0.18 350);
+    --radius: 1rem;
 
-    .dark {
-        --background: 0.15 0.02 30;
-        --foreground: 0.98 0 0;
-        --card: 0.18 0.02 30;
-        --card-foreground: 0.98 0 0;
-        --popover: 0.20 0.02 30;
-        --popover-foreground: 0.98 0 0;
-        --primary: 0.75 0.18 15;
-        --primary-foreground: 0.98 0 0;
-        --secondary: 0.25 0.03 30;
-        --secondary-foreground: 0.98 0 0;
-        --muted: 0.28 0.02 30;
-        --muted-foreground: 0.70 0.02 30;
-        --accent: 0.70 0.20 10;
-        --accent-foreground: 0.98 0 0;
-        --destructive: 0.60 0.25 15;
-        --destructive-foreground: 0.98 0 0;
-        --border: 0.30 0.02 30;
-        --input: 0.30 0.02 30;
-        --ring: 0.75 0.18 15;
-        --romantic-pink: 0.75 0.18 350;
-        --romantic-rose: 0.65 0.22 10;
-        --romantic-red: 0.55 0.28 15;
-        --romantic-cream: 0.85 0.05 40;
-        --chart-1: 0.75 0.18 15;
-        --chart-2: 0.70 0.20 10;
-        --chart-3: 0.82 0.15 25;
-        --chart-4: 0.85 0.15 350;
-        --chart-5: 0.95 0.03 40;
-    }
+    /* Custom romantic colors */
+    --romantic-pink: oklch(80% 0.12 350);
+    --romantic-rose: oklch(65% 0.18 350);
+    --romantic-red: oklch(55% 0.22 10);
+    --romantic-cream: oklch(95% 0.02 60);
+  }
 
-    * {
-        @apply border-border;
-    }
-    
-    body {
-        @apply bg-background text-foreground;
-        font-feature-settings: "rlig" 1, "calt" 1;
-    }
+  .dark {
+    --background: oklch(15% 0.02 320);
+    --foreground: oklch(95% 0.01 320);
+    --card: oklch(18% 0.02 320);
+    --card-foreground: oklch(95% 0.01 320);
+    --popover: oklch(18% 0.02 320);
+    --popover-foreground: oklch(95% 0.01 320);
+    --primary: oklch(70% 0.15 350);
+    --primary-foreground: oklch(15% 0.02 320);
+    --secondary: oklch(25% 0.02 320);
+    --secondary-foreground: oklch(95% 0.01 320);
+    --muted: oklch(25% 0.02 320);
+    --muted-foreground: oklch(65% 0.02 320);
+    --accent: oklch(25% 0.02 320);
+    --accent-foreground: oklch(95% 0.01 320);
+    --destructive: oklch(55% 0.22 25);
+    --destructive-foreground: oklch(95% 0.01 320);
+    --border: oklch(25% 0.02 320);
+    --input: oklch(25% 0.02 320);
+    --ring: oklch(70% 0.15 350);
 
-    h1, h2, h3, h4, h5, h6 {
-        @apply font-bold tracking-tight;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    section {
-        scroll-margin-top: 4rem;
-    }
+    /* Custom romantic colors for dark mode */
+    --romantic-pink: oklch(75% 0.12 350);
+    --romantic-rose: oklch(70% 0.15 350);
+    --romantic-red: oklch(60% 0.20 10);
+    --romantic-cream: oklch(30% 0.02 60);
+  }
 }
 
-@layer utilities {
-    .animate-gradient {
-        background-size: 200% 200%;
-        animation: gradient 8s ease infinite;
-    }
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+  }
+}
 
-    @keyframes gradient {
-        0%, 100% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-    }
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
 
-    .animate-float {
-        animation: float 3s ease-in-out infinite;
-    }
+/* Offset for sticky header */
+section {
+  scroll-margin-top: 5rem;
+}
 
-    .animate-float-slow {
-        animation: float 6s ease-in-out infinite;
-    }
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
 
-    .animate-float-card {
-        animation: float 4s ease-in-out infinite;
-    }
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
 
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0px);
-        }
-        50% {
-            transform: translateY(-10px);
-        }
-    }
+@keyframes bounce-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
 
-    .animate-bounce-slow {
-        animation: bounce-slow 3s ease-in-out infinite;
-    }
+@keyframes flame-flicker {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(1.05) translateY(-2px);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(0.98) translateY(1px);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1.03) translateY(-1px);
+    opacity: 0.97;
+  }
+}
 
-    @keyframes bounce-slow {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-15px);
-        }
-    }
+@keyframes flame-out {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.8) translateY(-5px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.3) translateY(-10px);
+    opacity: 0;
+  }
+}
 
-    .animate-heartbeat {
-        animation: heartbeat 1.5s ease-in-out infinite;
-    }
+@keyframes smoke-rise {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-40px) scale(1.2);
+    opacity: 0;
+  }
+}
 
-    @keyframes heartbeat {
-        0%, 100% {
-            transform: scale(1);
-        }
-        25% {
-            transform: scale(1.1);
-        }
-        50% {
-            transform: scale(1);
-        }
-        75% {
-            transform: scale(1.05);
-        }
-    }
+@keyframes smoke-fade {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+.animate-flame-flicker {
+  animation: flame-flicker 1.5s ease-in-out infinite;
+}
+
+.animate-flame-out {
+  animation: flame-out 0.8s ease-out forwards;
+}
+
+.animate-smoke-rise {
+  animation: smoke-rise 1.5s ease-out forwards;
+}
+
+.animate-smoke-fade {
+  animation: smoke-fade 1.5s ease-out forwards;
 }

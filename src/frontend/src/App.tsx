@@ -2,6 +2,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { RobloxSection } from './components/RobloxSection';
 import { Gallery } from './components/Gallery';
+import { CakeSection } from './components/CakeSection';
 import { FinaleSection } from './components/FinaleSection';
 import { Footer } from './components/Footer';
 import { MusicControl } from './components/MusicControl';
@@ -19,6 +20,7 @@ function App() {
           {sectionVisibility.hero && <Hero />}
           {sectionVisibility.roblox && <RobloxSection />}
           {sectionVisibility.photos && <Gallery />}
+          {sectionVisibility.cake && <CakeSection />}
           {sectionVisibility.finale && <FinaleSection />}
         </main>
         {sectionVisibility.footer && <Footer />}

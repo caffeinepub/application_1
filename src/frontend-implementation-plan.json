@@ -1,21 +1,121 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Update Pink Dreams gallery description text",
+  "title": "Interactive Cake section with tappable candle, birthday popup, and blow-out animation",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Update the description text for the first visible gallery image (id: '1', title: 'Pink Dreams') in the centralized site config so the gallery card and modal display the new wording.",
+      "summary": "Add a new top-level “Cake” section and expose it via siteConfig-driven header/footer navigation with enable/disable support.",
       "acceptanceCriteria": [
-        "The first visible gallery card (Pink Dreams) shows the updated description text exactly: \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\".",
-        "No other gallery card titles or descriptions are changed.",
-        "Opening the image modal for the same image also shows the updated description text."
+        "A new “Cake” navigation item appears alongside existing sections when enabled in the central site config.",
+        "Clicking “Cake” scrolls/navigates to the Cake page/section reliably on desktop.",
+        "The Cake page/section can be enabled/disabled via the central site configuration without code changes elsewhere."
       ],
       "file_operations": [
         {
           "path": "frontend/src/content/siteConfig.ts",
           "operation": "modify",
-          "description": "In the galleryImages entry with id '1' and title 'Pink Dreams', change description from \"This is the coolest photo of us in my gallery... uff Aesthetic log :>\" to \"If there was an award for the cutest photo ever taken, this would win by a mile *kuchupuchu*\", without altering any other gallery image fields."
+          "description": "Extend centralized visibility + navigation configuration to include a new Cake section (add a visibility toggle and include a “Cake” item in the nav item generator when enabled)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wire the Cake section into the existing SPA section rendering flow by conditionally rendering the new Cake section based on the siteConfig visibility toggle."
+        },
+        {
+          "path": "frontend/src/components/CakeSection.tsx",
+          "operation": "create",
+          "description": "Create the new Cake top-level section component with a stable section id used by navigation scrolling (e.g., used by the siteConfig-driven navigation + scrollIntoView)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Implement the Cake section UI with a large centered cake illustration and a visibly lit candle by default, consistent with existing Tailwind light/dark theme patterns.",
+      "acceptanceCriteria": [
+        "On first render, the cake is large and centered and the candle appears lit.",
+        "The page is responsive (mobile and desktop) and does not overflow horizontally.",
+        "The page styling is consistent with the existing design system and theming (light/dark)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CakeSection.tsx",
+          "operation": "modify",
+          "description": "Implement responsive Cake section layout using Tailwind classes consistent with existing sections; render the default “lit” cake state using static assets from frontend/public/assets/generated/cake-lit.dim_1200x1200.png and overlay/frontend-position the flame using frontend/public/assets/generated/candle-flame.dim_256x256.png."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add tap/click interaction to show “Happy B’day!” and animate the candle transitioning from lit to extinguished (flame fade/shrink + smoke puff), with idempotent behavior.",
+      "acceptanceCriteria": [
+        "Clicking/tapping the cake/candle opens a popup with the exact text “Happy B’day!” (English).",
+        "After the first click/tap, the candle changes to an “extinguished” state and the lit flame is no longer visible.",
+        "The transition from lit to extinguished includes a visible animation (not an instant swap).",
+        "Repeated clicks/taps do not break the UI; the candle remains extinguished (idempotent behavior is acceptable)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CakeSection.tsx",
+          "operation": "modify",
+          "description": "Add click/tap handling (on the candle and/or cake hit area) to transition local state from lit→extinguished once; swap/transition between frontend/public/assets/generated/cake-lit.dim_1200x1200.png and frontend/public/assets/generated/cake-out.dim_1200x1200.png; animate flame disappearance and show smoke using frontend/public/assets/generated/candle-smoke.dim_256x256.png."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add small reusable animation utilities (Tailwind-compatible custom keyframes/classes) to support the candle blow-out transition (flame fade/shrink + smoke puff) without introducing horizontal overflow."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Show the “Happy B’day!” popup using existing project dialog/toast primitives without modifying any read-only UI component sources under frontend/src/components/ui.",
+      "acceptanceCriteria": [
+        "The popup uses existing project primitives (toast/dialog) and renders correctly in light and dark mode.",
+        "No files under frontend/src/components/ui are modified.",
+        "The popup is accessible: it can be dismissed via click/tap and via keyboard (Escape) if implemented as a dialog."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/CakeSection.tsx",
+          "operation": "modify",
+          "description": "Implement the popup using the existing shadcn/ui dialog pattern already used in the app (e.g., import Dialog primitives similarly to ImageModal) so it supports Escape/click dismissal; do not change any files under frontend/src/components/ui. Use the exact English text “Happy B’day!” in the dialog content. Use the shadcn-ui component primitives (Dialog) to support accessibility; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add required generated Cake image assets under frontend/public/assets/generated and render them as static frontend assets (no backend involvement).",
+      "acceptanceCriteria": [
+        "New cake/candle images exist in frontend/public/assets/generated with the exact filenames specified in this build request.",
+        "The Cake page uses these static assets via a /assets/generated/... path and they load correctly in production build.",
+        "No backend endpoints are introduced for serving or transforming these images."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/generated/cake-lit.dim_1200x1200.png",
+          "operation": "create",
+          "description": "Add the generated static asset for the lit-candle cake illustration at the exact required path/filename."
+        },
+        {
+          "path": "frontend/public/assets/generated/cake-out.dim_1200x1200.png",
+          "operation": "create",
+          "description": "Add the generated static asset for the extinguished-candle cake illustration with subtle smoke at the exact required path/filename."
+        },
+        {
+          "path": "frontend/public/assets/generated/candle-flame.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated static flame icon at the exact required path/filename."
+        },
+        {
+          "path": "frontend/public/assets/generated/candle-smoke.dim_256x256.png",
+          "operation": "create",
+          "description": "Add the generated static smoke puff/curl icon at the exact required path/filename."
+        },
+        {
+          "path": "frontend/src/components/CakeSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the Cake section renders the above generated assets directly from the static public path: frontend/public/assets/generated/cake-lit.dim_1200x1200.png, frontend/public/assets/generated/cake-out.dim_1200x1200.png, frontend/public/assets/generated/candle-flame.dim_256x256.png, frontend/public/assets/generated/candle-smoke.dim_256x256.png."
         }
       ]
     }
